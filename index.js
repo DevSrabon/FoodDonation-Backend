@@ -5,7 +5,7 @@ const app = express();
 const users = require("./router/user.router");
 const dotenv = require("dotenv");
 dotenv.config();
-const port = 8000 || process.env.PORT;
+const port = process.env.PORT || 8000;
 
 // middleware
 app.use(cors());
