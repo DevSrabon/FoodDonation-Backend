@@ -4,7 +4,6 @@ const database = require("./utils/db");
 const app = express();
 const users = require("./router/user.router");
 const dotenv = require("dotenv");
-const User = require("./models/User");
 dotenv.config();
 const port = 8000 || process.env.PORT;
 
