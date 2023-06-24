@@ -1,6 +1,29 @@
 const User = require("../models/User");
 const { generateToken } = require("../utils/token");
 
+exports.getAllUser = async (req, res) => {
+  try {
+    const users = await User.find({});
+    if (users) {
+      res.status(200).json({
+        status: "success",
+        data: users,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
 exports.getUser = async (req, res) => {
   try {
     const { email } = req.query;
@@ -58,11 +81,28 @@ exports.createUser = async (req, res, next) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const { email, role, subRole } = req.body;
+    const {
+      email,
+      role,
+      subRole,
+      location,
+      restaurantName,
+      image,
+      fssaiLicense,
+      panNumber,
+    } = req.body;
 
     const updatedUser = await User.findOneAndUpdate(
       { email },
-      { role, subRole },
+      {
+        role,
+        subRole,
+        location,
+        restaurantName,
+        image,
+        fssaiLicense,
+        panNumber,
+      },
       { new: true }
     );
 

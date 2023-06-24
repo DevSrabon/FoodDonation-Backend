@@ -52,6 +52,18 @@ const userSchema = new mongoose.Schema(
       default: "needy",
     },
     subRole: String,
+    restaurantName: String,
+    image: String,
+    location: {
+      latitude: {
+        type: Number,
+      },
+      longitude: {
+        type: Number,
+      },
+    },
+    fssaiLicense: String,
+    panNumber: Number,
   },
   {
     timestamps: true,
