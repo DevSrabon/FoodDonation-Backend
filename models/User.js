@@ -64,6 +64,8 @@ const userSchema = new mongoose.Schema(
     },
     fssaiLicense: String,
     panNumber: Number,
+    photo: String,
+    bio: String,
   },
   {
     timestamps: true,
