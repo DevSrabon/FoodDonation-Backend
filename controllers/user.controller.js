@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const { updateUserServices } = require("../services/users.service");
 const { generateToken } = require("../utils/token");
 
 exports.getAllUser = async (req, res) => {
@@ -52,24 +53,14 @@ exports.getUser = async (req, res) => {
 exports.createUser = async (req, res, next) => {
   try {
     const body = req.body;
-    const { email } = body;
-    const userDb = User.findOne({ email });
-    if (email === userDb.email)
-      return res.status(400).json({
-        status: "fail",
-        message: "User Already Exits",
-        error: error.message,
-      });
-
     const user = await User.create(body);
-    const token = generateToken(user);
-    res.status(201).json({
-      status: "success",
-      data: {
-        user,
-        token,
-      },
-    });
+
+    if (user) {
+      res.status(201).json({
+        status: "success",
+        data: user,
+      });
+    }
   } catch (error) {
     res.status(400).json({
       status: "fail",
@@ -81,20 +72,38 @@ exports.createUser = async (req, res, next) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const { email, ...rest } = req.body;
-
-    const updatedUser = await User.findOneAndUpdate(
-      { email },
-      {
-        $set: rest,
-      },
-      { new: true }
-    );
+    const updatedUser = await updateUserServices(req);
 
     if (updatedUser) {
       res.status(200).json({
         status: "success",
         data: updatedUser,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
+exports.updateBio = async (req, res) => {
+  try {
+    const updatedUser = await updateUserServices(req);
+
+    if (updatedUser) {
+      const accessToken = generateToken(updatedUser);
+      res.status(200).json({
+        status: "success",
+        data: updatedUser,
+        accessToken,
       });
     } else {
       res.status(404).json({

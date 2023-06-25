@@ -29,43 +29,65 @@ const userSchema = new mongoose.Schema(
     phone: {
       type: Number,
       required: true,
-      unique: true,
+      unique: false, //we will change it later
       trim: true,
-      validate: {
-        validator: function (phone) {
-          return this.constructor
-            .findOne({ phone })
-            .exec()
-            .then((user) => {
-              if (user) {
-                return false;
-              }
-              return true;
-            });
-        },
-        message: "Phone number is already taken",
-      },
+      // validate: {
+      //   validator: function (phone) {
+      //     return this.constructor
+      //       .findOne({ phone })
+      //       .exec()
+      //       .then((user) => {
+      //         if (user) {
+      //           return false;
+      //         }
+      //         return true;
+      //       });
+      //   },
+      //   message: "Phone number is already taken",
+      // },
     },
     role: {
       type: String,
       enum: ["admin", "needy", "donor", "transporter"],
-      default: "needy",
     },
-    subRole: String,
-    restaurantName: String,
-    image: String,
+    subRole: {
+      type: String,
+
+      required: false,
+    },
+    categoryName: {
+      type: String,
+      unique: true,
+      required: false,
+    },
+    image: {
+      type: String,
+      required: false,
+    },
     location: {
-      latitude: {
-        type: Number,
-      },
-      longitude: {
-        type: Number,
-      },
+      latitude: { type: Number, required: false },
+      longitude: { type: Number, required: false },
     },
-    fssaiLicense: String,
-    panNumber: Number,
-    photo: String,
-    bio: String,
+    fssaiLicense: {
+      type: String,
+      unique: true,
+      required: false,
+    },
+    panNumber: {
+      type: Number,
+      unique: true,
+      required: false,
+    },
+    photo: {
+      type: String,
+      unique: true,
+      required: false,
+    },
+    bio: {
+      type: String,
+      unique: true,
+      required: false,
+    },
   },
   {
     timestamps: true,
