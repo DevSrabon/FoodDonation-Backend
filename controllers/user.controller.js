@@ -25,6 +25,32 @@ exports.getAllUser = async (req, res) => {
   }
 };
 
+exports.getToken = async (req, res) => {
+  try {
+    const { email } = req.query;
+
+    const user = await User.findOne({ email });
+    if (user) {
+      const jwtToken = generateToken(user);
+      res.status(200).json({
+        status: "success",
+        jwtToken,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
+
 exports.getUser = async (req, res) => {
   try {
     const { email } = req.query;
