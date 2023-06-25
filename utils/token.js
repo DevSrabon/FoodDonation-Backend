@@ -6,7 +6,7 @@ exports.generateToken = (userInfo) => {
     role: userInfo.role,
   };
   const token = jwt.sign(payload, process.env.TOKEN_SECRET, {
-    expiresIn: "30s",
+    expiresIn: "30d",
   });
   return token;
 };
