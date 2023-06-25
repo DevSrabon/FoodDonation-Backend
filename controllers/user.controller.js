@@ -81,27 +81,12 @@ exports.createUser = async (req, res, next) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const {
-      email,
-      role,
-      subRole,
-      location,
-      restaurantName,
-      image,
-      fssaiLicense,
-      panNumber,
-    } = req.body;
+    const { email, ...rest } = req.body;
 
     const updatedUser = await User.findOneAndUpdate(
       { email },
       {
-        role,
-        subRole,
-        location,
-        restaurantName,
-        image,
-        fssaiLicense,
-        panNumber,
+        $set: rest,
       },
       { new: true }
     );
