@@ -57,7 +57,6 @@ const userSchema = new mongoose.Schema(
     },
     categoryName: {
       type: String,
-      unique: true,
       required: false,
     },
     image: {
@@ -94,6 +93,6 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("UserCollection", userSchema);
 
 module.exports = User;

@@ -5,7 +5,8 @@ const verifyToken = require("../middleware/verifyToken");
 const authorization = require("../middleware/authorization");
 
 // create and get a user
-router.route("/").get(userController.getUser).post(userController.createUser);
+router.get("/getUser", userController.getUser);
+router.post("/postUser", userController.createUser);
 
 // jwt
 router.get("/jwt", userController.getToken);

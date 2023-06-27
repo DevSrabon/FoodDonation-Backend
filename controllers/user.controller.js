@@ -86,6 +86,8 @@ exports.createUser = async (req, res, next) => {
         status: "success",
         data: user,
       });
+    } else {
+      throw new Error("User creation failed"); // Throw an error if user creation fails
     }
   } catch (error) {
     res.status(400).json({
@@ -97,6 +99,10 @@ exports.createUser = async (req, res, next) => {
 };
 
 exports.updateUser = async (req, res) => {
+  console.log(
+    "🚀 ~ file: user.controller.js:100 ~ exports.updateUser= ~ req:",
+    req
+  );
   try {
     const updatedUser = await updateUserServices(req);
 
@@ -112,6 +118,7 @@ exports.updateUser = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       status: "error",
       message: "Internal Server Error",

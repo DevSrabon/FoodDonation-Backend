@@ -8,7 +8,7 @@ exports.updateUserServices = async (req) => {
     {
       $set: rest,
     },
-    { runValidators: true }
+    { new: true }
   );
   return updatedUser;
 };
