@@ -12,20 +12,23 @@ const postsSchema = new mongoose.Schema(
     email: {
       type: String,
     },
+    role: {
+      type: String,
+    },
     location: {
       latitude: { type: Number },
       longitude: { type: Number },
     },
-    image: {
-      type: [String],
+    // image: {
+    //   type: [String],
 
-      validate: {
-        validator: function (value) {
-          return value.length === 4;
-        },
-        message: "Image array must contain exactly 4 images",
-      },
-    },
+    //   validate: {
+    //     validator: function (value) {
+    //       return value.length === 4;
+    //     },
+    //     message: "Image array must contain exactly 4 images",
+    //   },
+    // },
     caption: {
       type: String,
     },
