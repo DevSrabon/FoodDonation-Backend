@@ -24,7 +24,7 @@ exports.updatePost = async (req, res) => {
   try {
     const { _id, ...rest } = req.body;
     const update = await Posts.findByIdAndUpdate(
-      { _id },
+      _id,
       { $set: rest },
       { new: true }
     );
@@ -34,11 +34,16 @@ exports.updatePost = async (req, res) => {
         status: "success",
         data: update,
       });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "Post not found",
+      });
     }
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      message: "Data is not inserted",
+      message: "Data is not updated",
       error: error.message,
     });
   }
