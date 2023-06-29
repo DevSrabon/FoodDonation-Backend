@@ -5,6 +5,6 @@ const verifyToken = require("../middleware/verifyToken");
 const authorization = require("../middleware/authorization");
 
 router.post("/", postController.createPost);
-router.post("/update", postController.updatePost);
+router.patch("/update", postController.updatePost);
 
 module.exports = router;
