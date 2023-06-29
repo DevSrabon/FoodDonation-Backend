@@ -1,5 +1,27 @@
 const Posts = require("../models/Posts");
-const { updateOne } = require("../models/User");
+
+exports.getAllPost = async (req, res) => {
+  try {
+    const posts = await Posts.find({});
+    if (posts) {
+      res.status(200).json({
+        status: "success",
+        data: posts,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "Post not found",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
 
 exports.createPost = async (req, res) => {
   try {
