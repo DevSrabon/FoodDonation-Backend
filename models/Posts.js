@@ -2,21 +2,23 @@ const mongoose = require("mongoose");
 
 const postsSchema = new mongoose.Schema(
   {
-    postCategory: {
+    postCategoryName: {
       type: String,
       required: [true, "Post category not found"],
     },
+    userName: {
+      type: String,
+    },
     email: {
       type: String,
-      required: true,
     },
     location: {
-      latitude: { type: Number, required: true },
-      longitude: { type: Number, required: true },
+      latitude: { type: Number },
+      longitude: { type: Number },
     },
     image: {
       type: [String],
-      required: true,
+
       validate: {
         validator: function (value) {
           return value.length === 4;
@@ -26,26 +28,41 @@ const postsSchema = new mongoose.Schema(
     },
     caption: {
       type: String,
-      required: true,
     },
     noOfItem: {
       type: Number,
-      required: true,
     },
-    mealType: {
-      type: String,
-      required: true,
-    },
-    quantity: {
-      type: String,
-      required: true,
-    },
+    items: [
+      {
+        id: {
+          type: Number,
+        },
+        qType: {
+          type: String,
+        },
+        value: {
+          type: Number,
+        },
+      },
+    ],
+    quantitiesDetail: [
+      {
+        id: {
+          type: Number,
+        },
+        order: {
+          type: String,
+        },
+        quantity: {
+          type: String,
+        },
+        quantityType: {
+          type: String,
+        },
+      },
+    ],
     expiredTime: {
       type: Date,
-      required: false,
-    },
-    order: {
-      type: String,
       required: false,
     },
   },
@@ -54,6 +71,6 @@ const postsSchema = new mongoose.Schema(
   }
 );
 
-const Posts = mongoose.model("Posts", postsSchema);
+const Posts = mongoose.model("PostsCollection", postsSchema);
 
 module.exports = Posts;

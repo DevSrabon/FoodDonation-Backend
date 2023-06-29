@@ -99,10 +99,6 @@ exports.createUser = async (req, res, next) => {
 };
 
 exports.updateUser = async (req, res) => {
-  console.log(
-    "🚀 ~ file: user.controller.js:100 ~ exports.updateUser= ~ req:",
-    req
-  );
   try {
     const updatedUser = await updateUserServices(req);
 
