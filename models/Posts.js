@@ -35,7 +35,7 @@ const postsSchema = new mongoose.Schema(
     noOfItem: {
       type: Number,
     },
-    items: [
+    listItems: [
       {
         id: {
           type: Number,
