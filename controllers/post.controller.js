@@ -22,9 +22,14 @@ exports.createPost = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
   try {
-    const update = await updateOne(req.body);
+    const { _id, ...rest } = req.body;
+    const update = await Posts.updateOne(
+      { _id },
+      { $set: rest },
+      { new: true }
+    );
 
-    if (post) {
+    if (update) {
       res.status(201).json({
         status: "success",
         data: post,
