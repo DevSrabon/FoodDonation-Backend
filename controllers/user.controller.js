@@ -4,10 +4,10 @@ const { generateToken } = require("../utils/token");
 
 // get users within 5 km radius
 exports.getMap = async (req, res) => {
-  const { latitude, longitude } = req.query;
+  const { latitude, longitude, role } = req.query;
   const radius = 5; // 5km radius
   try {
-    const user = await User.find({});
+    const user = await User.find({ role: { $ne: role } });
 
     console.log(user);
     const mapUsers = user.filter((user) => {

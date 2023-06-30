@@ -1,8 +1,14 @@
 const Posts = require("../models/Posts");
 
 exports.getAllPost = async (req, res) => {
+  const { role } = req.query;
+  console.log(
+    "🚀 ~ file: post.controller.js:5 ~ exports.getAllPost= ~ role:",
+    role
+  );
+
   try {
-    const posts = await Posts.find({});
+    const posts = await Posts.find({ role: { $ne: role } });
     if (posts) {
       res.status(200).json({
         status: "success",
