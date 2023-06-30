@@ -19,16 +19,16 @@ const postsSchema = new mongoose.Schema(
       latitude: { type: Number },
       longitude: { type: Number },
     },
-    // image: {
-    //   type: [String],
+    imageUrls: {
+      type: [String],
 
-    //   validate: {
-    //     validator: function (value) {
-    //       return value.length === 4;
-    //     },
-    //     message: "Image array must contain exactly 4 images",
-    //   },
-    // },
+      // validate: {
+      //   validator: function (value) {
+      //     return value.length === 4;
+      //   },
+      //   message: "Image array must contain exactly 4 images",
+      // },
+    },
     caption: {
       type: String,
     },
@@ -44,26 +44,17 @@ const postsSchema = new mongoose.Schema(
           type: String,
         },
         value: {
-          type: Number,
-        },
-      },
-    ],
-    quantitiesDetail: [
-      {
-        id: {
-          type: Number,
-        },
-        order: {
           type: String,
         },
         quantity: {
-          type: String,
+          type: Number,
         },
         quantityType: {
           type: String,
         },
       },
     ],
+    orderType: String,
     expiredTime: {
       type: Date,
       required: false,
