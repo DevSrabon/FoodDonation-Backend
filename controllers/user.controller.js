@@ -7,7 +7,9 @@ exports.getMap = async (req, res) => {
   const { latitude, longitude } = req.query;
   const radius = 5; // 5km radius
   try {
-    const user = await User.find({}).select("location");
+    const user = await User.find({});
+
+    console.log(user);
     const mapUsers = user.filter((user) => {
       const distance = calculateDistance(
         latitude,
