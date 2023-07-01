@@ -24,6 +24,47 @@ exports.getAllPost = async (req, res) => {
     });
   }
 };
+exports.getLatestPostByEmail = async (req, res) => {
+  const { email } = req.query;
+  const selectFields = req.query.fields;
+
+  try {
+    let selectQuery = {};
+    console.log(
+      "🚀 ~ file: post.controller.js:33 ~ exports.getLatestPostByEmail= ~ selectQuery:",
+      selectQuery
+    );
+    if (selectFields) {
+      const fieldsArray = selectFields.split(",").map((field) => field.trim());
+      fieldsArray.forEach((field) => {
+        selectQuery[field] = 1;
+      });
+    }
+
+    const post = await Posts.findOne({ email })
+      .sort({ date: -1 })
+      .limit(1)
+      .select(selectQuery);
+
+    if (post) {
+      res.status(200).json({
+        status: "success",
+        data: post,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "Post not found",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
+      error: error.message,
+    });
+  }
+};
 
 exports.createPost = async (req, res) => {
   try {
