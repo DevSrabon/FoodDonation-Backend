@@ -60,7 +60,7 @@ const userSchema = new mongoose.Schema(
       required: false,
     },
     image: {
-      type: String,
+      type: [String],
       required: false,
     },
     location: {
@@ -79,7 +79,6 @@ const userSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      unique: true,
       required: false,
     },
     bio: {

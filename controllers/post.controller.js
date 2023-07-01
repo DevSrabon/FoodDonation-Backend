@@ -2,10 +2,6 @@ const Posts = require("../models/Posts");
 
 exports.getAllPost = async (req, res) => {
   const { role } = req.query;
-  console.log(
-    "🚀 ~ file: post.controller.js:5 ~ exports.getAllPost= ~ role:",
-    role
-  );
 
   try {
     const posts = await Posts.find({ role: { $ne: role } });
@@ -72,6 +68,35 @@ exports.updatePost = async (req, res) => {
     res.status(400).json({
       status: "fail",
       message: "Data is not updated",
+      error: error.message,
+    });
+  }
+};
+exports.addComments = async (req, res) => {
+  try {
+    const { commentId, userName, comment } = req.body;
+
+    const update = await Posts.findByIdAndUpdate(
+      commentId,
+      { $push: { comments: { commentId, userName, comment } } },
+      { new: true }
+    );
+
+    if (update) {
+      res.status(201).json({
+        status: "success",
+        data: update,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "comment not found",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "fail",
+      message: "comment is not updated",
       error: error.message,
     });
   }

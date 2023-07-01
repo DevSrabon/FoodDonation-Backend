@@ -54,6 +54,16 @@ const postsSchema = new mongoose.Schema(
         },
       },
     ],
+
+    comments: {
+      type: "object",
+      properties: {
+        commentId: { type: "number" },
+        userName: { type: "string" },
+        comment: { type: "string" },
+      },
+    },
+
     orderType: String,
     expiredTime: {
       type: Date,

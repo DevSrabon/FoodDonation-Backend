@@ -7,5 +7,6 @@ const authorization = require("../middleware/authorization");
 router.get("/getPost", postController.getAllPost);
 router.post("/createPost", postController.createPost);
 router.patch("/updatePost", postController.updatePost);
+router.put("/comments", postController.addComments);
 
 module.exports = router;
