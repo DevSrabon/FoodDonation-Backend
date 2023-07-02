@@ -73,7 +73,7 @@ const userSchema = new mongoose.Schema(
       required: false,
     },
     panNumber: {
-      type: Number,
+      type: String,
       unique: true,
       required: false,
     },
