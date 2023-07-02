@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: false,
       unique: true,
       trim: true,
       validate: {
@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: Number,
-      required: true,
+      required: false,
       unique: false, //we will change it later
       trim: true,
       // validate: {
