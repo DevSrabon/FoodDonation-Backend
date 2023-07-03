@@ -4,7 +4,9 @@ exports.getAllPost = async (req, res) => {
   const { role } = req.query;
 
   try {
-    const posts = await Posts.find({ role: { $ne: role } });
+    const posts = await Posts.find({ role: { $ne: role } }).sort({
+      updatedAt: -1,
+    });
     if (posts) {
       res.status(200).json({
         status: "success",
