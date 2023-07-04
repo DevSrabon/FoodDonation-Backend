@@ -155,7 +155,16 @@ exports.createUser = async (req, res, next) => {
 
 exports.updateUser = async (req, res) => {
   try {
-    const updatedUser = await updateUserServices(req);
+    const { email } = req.query;
+    const body = req.body;
+
+    const updatedUser = await User.findOneAndUpdate(
+      { email },
+      {
+        $set: body,
+      },
+      { new: true }
+    );
 
     if (updatedUser) {
       res.status(200).json({
