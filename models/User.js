@@ -28,9 +28,9 @@ const userSchema = new mongoose.Schema(
     },
     phone: {
       type: Number,
-      required: false,
-      unique: false, //we will change it later
-      trim: true,
+      // required: false,
+      // unique: false, //we will change it later
+      // trim: true,
       // validate: {
       //   validator: function (phone) {
       //     return this.constructor
