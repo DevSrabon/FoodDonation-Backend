@@ -131,7 +131,7 @@ exports.getUser = async (req, res) => {
   }
 };
 
-exports.createUser = async (req, res, next) => {
+exports.createUser = async (req, res) => {
   try {
     const body = req.body;
     const user = await User.create(body);
