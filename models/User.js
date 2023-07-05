@@ -26,6 +26,7 @@ const userSchema = new mongoose.Schema(
         message: "Email is already taken",
       },
     },
+    isAdmin: Boolean,
     phone: {
       type: String,
       // required: false,
