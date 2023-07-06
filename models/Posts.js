@@ -15,6 +15,15 @@ const postsSchema = new mongoose.Schema(
     role: {
       type: String,
     },
+    subRole: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    photo: {
+      type: String,
+    },
     location: {
       latitude: { type: Number },
       longitude: { type: Number },
@@ -55,14 +64,14 @@ const postsSchema = new mongoose.Schema(
       },
     ],
 
-    comments: {
-      type: "object",
-      properties: {
-        commentId: { type: "number" },
-        userName: { type: "string" },
-        comment: { type: "string" },
-      },
-    },
+    // comments: {
+    //   type: "object",
+    //   properties: {
+    //     commentId: { type: "number" },
+    //     userName: { type: "string" },
+    //     comment: { type: "string" },
+    //   },
+    // },
 
     orderType: String,
     expiredTime: {
