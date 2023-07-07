@@ -187,32 +187,6 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-exports.updateBio = async (req, res) => {
-  try {
-    const updatedUser = await updateUserServices(req);
-
-    if (updatedUser) {
-      const accessToken = generateToken(updatedUser);
-      res.status(200).json({
-        status: "success",
-        data: updatedUser,
-        accessToken,
-      });
-    } else {
-      res.status(404).json({
-        status: "fail",
-        message: "User not found",
-      });
-    }
-  } catch (error) {
-    res.status(400).json({
-      status: "error",
-      message: "Internal Server Error",
-      error: error.message,
-    });
-  }
-};
-
 exports.deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;

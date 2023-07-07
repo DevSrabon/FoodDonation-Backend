@@ -19,6 +19,8 @@ router.patch("/update-bio", userController.updateBio);
 
 router.get("/map", userController.getMap);
 
+// router.get("/getNotifyToken", userController.createNotify);
+// router.post("/postNotifyToken", userController.getNotify);
 // delete a user
 router.delete(
   "/:id",

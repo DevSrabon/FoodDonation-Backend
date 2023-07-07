@@ -87,6 +87,9 @@ const userSchema = new mongoose.Schema(
       unique: true,
       required: false,
     },
+    notifyToken: {
+      type: String,
+    },
   },
   {
     timestamps: true,
