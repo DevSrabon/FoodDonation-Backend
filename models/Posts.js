@@ -75,8 +75,8 @@ const postsSchema = new mongoose.Schema(
 
     orderType: String,
     expiredTime: {
-      type: Date,
-      required: false,
+      type: String,
+      default: 10,
     },
   },
   {
