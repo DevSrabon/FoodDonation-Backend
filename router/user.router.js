@@ -15,7 +15,6 @@ router.get("/all", userController.getAllUser);
 
 // update a user role
 router.patch("/update-role", userController.updateUser);
-router.patch("/update-bio", userController.updateBio);
 
 router.get("/map", userController.getMap);
 
