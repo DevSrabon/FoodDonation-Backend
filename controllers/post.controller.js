@@ -32,10 +32,7 @@ exports.getLatestPostByEmail = async (req, res) => {
 
   try {
     let selectQuery = {};
-    console.log(
-      "🚀 ~ file: post.controller.js:33 ~ exports.getLatestPostByEmail= ~ selectQuery:",
-      selectQuery
-    );
+
     if (selectFields) {
       const fieldsArray = selectFields.split(",").map((field) => field.trim());
       fieldsArray.forEach((field) => {

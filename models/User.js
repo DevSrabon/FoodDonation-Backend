@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: false,
       unique: true,
-      trim: true,
       validate: {
         validator: function (email) {
           return this.constructor
@@ -70,12 +69,10 @@ const userSchema = new mongoose.Schema(
     },
     fssaiLicense: {
       type: String,
-      unique: true,
       required: false,
     },
     panNumber: {
       type: String,
-      unique: true,
       required: false,
     },
     photo: {
@@ -84,7 +81,10 @@ const userSchema = new mongoose.Schema(
     },
     bio: {
       type: String,
-      unique: true,
+      required: false,
+    },
+    designation: {
+      type: String,
       required: false,
     },
     notifyToken: {
