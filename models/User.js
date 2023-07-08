@@ -90,6 +90,15 @@ const userSchema = new mongoose.Schema(
     notifyToken: {
       type: String,
     },
+    donorNotification: {
+      type: Boolean,
+    },
+    needyNotification: {
+      type: Boolean,
+    },
+    transporterNotification: {
+      type: Boolean,
+    },
   },
   {
     timestamps: true,

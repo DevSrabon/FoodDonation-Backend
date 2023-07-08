@@ -134,6 +134,14 @@ exports.getUser = async (req, res) => {
 exports.createUser = async (req, res) => {
   try {
     const body = req.body;
+    if (body.role === "needy") {
+      body.needyNotification = false;
+    } else if (body.role === "donor") {
+      body.donorNotification = false;
+    } else {
+      body.transporterNotification = false;
+    }
+
     const user = await User.create(body);
 
     if (user) {
@@ -142,7 +150,7 @@ exports.createUser = async (req, res) => {
         data: user,
       });
     } else {
-      throw new Error("User creation failed"); // Throw an error if user creation fails
+      throw new Error("User creation failed");
     }
   } catch (error) {
     res.status(400).json({
