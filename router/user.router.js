@@ -17,6 +17,7 @@ router.get("/all", userController.getAllUser);
 router.patch("/update-role", userController.updateUser);
 
 router.get("/map", userController.getMap);
+router.get("/map/getTransporter", userController.getTransporter);
 
 // router.get("/getNotifyToken", userController.createNotify);
 // router.post("/postNotifyToken", userController.getNotify);

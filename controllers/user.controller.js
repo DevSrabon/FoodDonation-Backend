@@ -9,7 +9,6 @@ exports.getMap = async (req, res) => {
   try {
     const user = await User.find({ role: { $ne: role } });
 
-    console.log(user);
     const mapUsers = user.filter((user) => {
       const distance = calculateDistance(
         latitude,
@@ -37,25 +36,59 @@ exports.getMap = async (req, res) => {
       error: error.message,
     });
   }
+};
+exports.getTransporter = async (req, res) => {
+  const { latitude, longitude } = req.query;
+  const radius = 10; // 10km radius
+  try {
+    const user = await User.find({ role: "transporter" });
 
-  function calculateDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371; // Radius of the Earth in km
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(lat1)) *
-        Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-    return distance;
-  }
-  function toRad(degrees) {
-    return degrees * (Math.PI / 180);
+    const mapUsers = user.filter((user) => {
+      const distance = calculateDistance(
+        latitude,
+        longitude,
+        user.location.latitude,
+        user.location.longitude
+      );
+      return distance <= radius;
+    });
+    if (mapUsers) {
+      res.status(200).json({
+        status: "success",
+        data: mapUsers,
+      });
+    } else {
+      res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({
+      status: "error",
+      message: "Internal Server Error",
+      error: error.message,
+    });
   }
 };
+// Calculate Distance
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371; // Radius of the Earth in km
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) *
+      Math.cos(toRad(lat2)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = R * c;
+  return distance;
+}
+function toRad(degrees) {
+  return degrees * (Math.PI / 180);
+}
 
 exports.getAllUser = async (req, res) => {
   try {
