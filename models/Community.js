@@ -4,35 +4,55 @@ const communitySchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
+    },
+    email: {
+      type: String,
+      required: false,
+    },
+    role: {
+      type: String,
+      required: false,
+    },
+    photo: {
+      type: String,
+      required: false,
+    },
+    subRole: {
+      type: String,
+      required: false,
     },
     organization: {
       type: String,
-      required: true,
+      required: false,
     },
     location: {
       type: String,
-      required: true,
+      required: false,
     },
     description: {
       type: String,
-      required: true,
+      required: false,
     },
     location: {
       type: String,
-      required: true,
+      required: false,
     },
     imageUrls: {
       type: [String],
-      required: true,
+      required: false,
     },
     noOfItem: {
       type: Number,
-      required: true,
+      required: false,
+    },
+    date: {
+      type: Date,
+      required: false,
     },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );
 
