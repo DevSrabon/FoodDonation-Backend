@@ -175,11 +175,11 @@ exports.getUser = async (req, res) => {
 
 exports.createUser = async (req, res) => {
   const body = req.body;
-  if (body.role === "needy") {
+  if (body.role == "needy") {
     body.needyNotification = false;
-  } else if (body.role === "donor") {
+  } else if (body.role == "donor") {
     body.donorNotification = false;
-  } else if (body.role === "transporter") {
+  } else if (body.role == "transporter") {
     body.transporterNotification = false;
   }
   try {
