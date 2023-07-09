@@ -180,7 +180,7 @@ exports.createUser = async (req, res) => {
       body.needyNotification = false;
     } else if (body.role === "donor") {
       body.donorNotification = false;
-    } else {
+    } else if (body.role === "transporter") {
       body.transporterNotification = false;
     }
 
