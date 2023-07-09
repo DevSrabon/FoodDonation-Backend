@@ -18,7 +18,7 @@ exports.createPost = async (req, res) => {
 };
 exports.getAll = async (req, res) => {
   try {
-    const community = await Community.find({});
+    const community = await Community.find({}).sort({ date: -1 });
     if (community) {
       res.status(201).json({
         status: "success",
