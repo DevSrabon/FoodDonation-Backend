@@ -174,19 +174,22 @@ exports.getUser = async (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
-  const body = req.body;
-  if (body.role == "needy") {
-    body.needyNotification = false;
-  } else if (body.role == "donor") {
-    body.donorNotification = false;
-  } else if (body.role == "transporter") {
-    body.transporterNotification = false;
-  }
   try {
-    const user = await User.create(body);
+    const body = req.body;
+    let notifications = {};
+
+    if (body.role === "needy") {
+      notifications.needyNotification = false;
+    } else if (body.role === "donor") {
+      notifications.donorNotification = false;
+    } else if (body.role === "transporter") {
+      notifications.transporterNotification = false;
+    }
+
+    const user = await User.create({ ...body, ...notifications });
 
     if (user) {
-      res.status(201).json({
+      return res.status(201).json({
         status: "success",
         data: user,
       });
@@ -194,7 +197,7 @@ exports.createUser = async (req, res) => {
       throw new Error("User creation failed");
     }
   } catch (error) {
-    res.status(400).json({
+    return res.status(400).json({
       status: "fail",
       message: "Data is not inserted",
       error: error.message,
