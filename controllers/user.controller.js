@@ -6,8 +6,17 @@ const { generateToken } = require("../utils/token");
 exports.getMap = async (req, res) => {
   const { latitude, longitude, role } = req.query;
   const radius = 100; // 100km radius
+  let query = {};
+
+  if (role === "needy") {
+    query = { role: "donor" };
+  } else if (role === "transporter") {
+    query = { role: "needy" };
+  } else if (role === "donor") {
+    query = { role: "needy" };
+  }
   try {
-    const user = await User.find({ role: { $ne: role } });
+    const user = await User.find(query);
 
     const mapUsers = user.filter((user) => {
       const distance = calculateDistance(
