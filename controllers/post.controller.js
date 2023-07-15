@@ -19,7 +19,7 @@ exports.getAllPost = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "error",
       message: "Internal Server Error",
       error: error.message,
@@ -76,7 +76,7 @@ exports.createPost = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "fail",
       message: "Data is not inserted",
       error: error.message,
@@ -105,7 +105,7 @@ exports.updatePost = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "fail",
       message: "Data is not updated",
       error: error.message,
@@ -134,9 +134,27 @@ exports.addComments = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "fail",
       message: "comment is not updated",
+      error: error.message,
+    });
+  }
+};
+
+exports.delete = async (req, res) => {
+  try {
+    const posts = await Posts.deleteMany({});
+    if (posts) {
+      res.status(202).json({
+        status: "success",
+        data: posts,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: "No data found",
       error: error.message,
     });
   }

@@ -9,9 +9,9 @@ exports.createPost = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
-      status: "fail",
-      message: "Data is not inserted",
+    res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
       error: error.message,
     });
   }
@@ -26,9 +26,9 @@ exports.getAll = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
-      status: "fail",
-      message: "Data is not inserted",
+    res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
       error: error.message,
     });
   }
@@ -43,9 +43,9 @@ exports.delete = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
-      status: "fail",
-      message: "Data is not inserted",
+    res.status(500).json({
+      status: "error",
+      message: "Internal Server Error",
       error: error.message,
     });
   }

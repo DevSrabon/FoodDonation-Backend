@@ -39,7 +39,7 @@ exports.getMap = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "error",
       message: "Internal Server Error",
       error: error.message,
@@ -73,7 +73,7 @@ exports.getTransporter = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "error",
       message: "Internal Server Error",
       error: error.message,
@@ -114,7 +114,7 @@ exports.getAllUser = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "error",
       message: "Internal Server Error",
       error: error.message,
@@ -140,7 +140,7 @@ exports.getToken = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "error",
       message: "Internal Server Error",
       error: error.message,
@@ -165,7 +165,7 @@ exports.getUser = async (req, res) => {
       });
     }
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "error",
       message: "Internal Server Error",
       error: error.message,
@@ -197,7 +197,7 @@ exports.createUser = async (req, res) => {
       throw new Error("User creation failed");
     }
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       status: "fail",
       message: "Data is not inserted",
       error: error.message,
@@ -231,7 +231,7 @@ exports.updateUser = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400).json({
+    res.status(500).json({
       status: "error",
       message: "Internal Server Error",
       error: error.message,

@@ -9,5 +9,5 @@ router.get("/getPostByEmail", postController.getLatestPostByEmail);
 router.post("/createPost", postController.createPost);
 router.patch("/updatePost", postController.updatePost);
 router.put("/comments", postController.addComments);
-
+router.delete("/delete", postController.delete);
 module.exports = router;
